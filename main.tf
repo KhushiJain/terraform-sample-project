@@ -7,12 +7,17 @@ resource "google_compute_instance" "inst" {
 	name = "${var.common-name}"
 	zone = "${var.gcp-region}-a"
 	
-	machine_type = "f1-micro"
+	machine_type = "n1-standard-1"
 	
 	boot_disk {
 		initialize_params {
 			image = "centos-cloud/centos-7"
 		}
+	}
+	
+	scheduling {
+		preemptible = true	
+		automatic_restart = false
 	}
 	
 	network_interface {
